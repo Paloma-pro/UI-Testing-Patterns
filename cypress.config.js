@@ -55,7 +55,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       baseUrl: 'http://lojaebac.ebaconline.art.br/',
-      require('cypress-mochawesome-reporter/plugin')(on),
-    },
+      require('cypress-mochawesome-reporter/plugin')(on);
+    }
   },
 });
