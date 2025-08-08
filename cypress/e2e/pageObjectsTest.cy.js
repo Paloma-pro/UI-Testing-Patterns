@@ -8,7 +8,7 @@ const { profilePage } = require('../support/pages/profile.page')
 describe('Teste de Autenticação', () => {
 
   beforeEach(() => {
-    cy.setCookie('ebacStoreVersion', 'v2', { domain: 'lojaebac.ebaconline.art.br' })
+    // cy.setCookie('ebacStoreVersion', 'v2', { domain: 'lojaebac.ebaconline.art.br' })
     cy.visit('/')
   });
 
