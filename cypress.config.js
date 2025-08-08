@@ -2,6 +2,7 @@
 const { defineConfig } = require("cypress");
 const webpack = require("@cypress/webpack-preprocessor");
 const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
+const { defineConfig } = require('cypress');
 
 
 async function setupNodeEvents(on, config) {
@@ -40,5 +41,22 @@ module.exports = defineConfig({
     baseUrl: 'http://lojaebac.ebaconline.art.br/',
     specPattern: '**/*.feature',
     setupNodeEvents,
+  },
+});
+
+module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'Testing Patterns - Relatório de Testes',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
+    reportDir: 'public'
+  },
+  e2e: {
+    setupNodeEvents(on, config) {
+      require('cypress-mochawesome-reporter/plugin')(on);
+    },
   },
 });
