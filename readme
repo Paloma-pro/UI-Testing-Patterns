@@ -1,0 +1,27 @@
+// A dependência que queremos "stubbar"
+const api = {
+  fetchUsuario: (id) => {
+    // Na vida real, isso faria uma chamada de rede
+    throw new Error("Não chamar a API de verdade!");
+  }
+};
+
+// Função que queremos testar
+const obterNomeDeUsuario = (id) => {
+  const usuario = api.fetchUsuario(id);
+  return usuario.nome.toUpperCase();
+};
+
+// --- Teste com Jest ---
+describe('obterNomeDeUsuario', () => {
+  test('deve retornar o nome do usuário em maiúsculas', () => {
+    // Criando o Stub com jest.fn()
+    api.fetchUsuario = jest.fn().mockReturnValue({ id: 1, nome: "Ana" });
+
+    const nome = obterNomeDeUsuario(1);
+
+    expect(nome).toBe("ANA");
+    // Verificamos se a nossa função dublê foi chamada corretamente
+    expect(api.fetchUsuario).toHaveBeenCalledWith(1);
+  });
+});
