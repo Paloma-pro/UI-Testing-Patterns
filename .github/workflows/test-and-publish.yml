@@ -6,10 +6,6 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 jobs:
   run-cypress-and-deploy:
@@ -32,11 +28,14 @@ jobs:
         with:
           browser: chrome
 
-      - name: Carregar artefato para GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+      - name: Publish Report
+        uses: peaceiris/actions-gh-pages@v2
         with:
-          path: ./public
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
 
-      - name: Implantar na GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    # - name: Deploy
+    #   uses: peaceiris/actions-gh-pages@v4
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: ./public
